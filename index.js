@@ -45,7 +45,7 @@ class Person {
   constructor(name, age){
     this.name = name;
     this.age = age;
-    this.stomach = []
+    this.stomach = [];
   }
   //eat method
   eat(someFood){
@@ -83,9 +83,37 @@ console.log(personOne.toString())
         + The `drive` method should return a string "I ran out of fuel at x miles!" x being `odometer`.
 */
 
+//Car constructor which takes model and milesPerGallon as arguments + tank and odometer for methods
 class Car {
+  constructor(model, milesPerGallon){
+    this.model = model;
+    this.milesPerGallon = milesPerGallon;
+    this.tank = 0;
+    this.odometer = 0;
+  }
+  //create 'fill' method to alter 'tank' value with 'gallons' of fuel
+  fill(gallons){
+    this.tank += gallons;
+  }
+  //create 'drive' method to recieve 'distance' as an argument
+  drive(distance){
+    if(this.tank >= distance/this.milesPerGallon){
+      return this.tank -= distance/this.milesPerGallon, this.odometer += distance;
+    }
+    else{
+      return `I ran out of fuel at ${this.odometer} miles!`
+    }
+  }
 
 }
+
+//Declare new Car 
+const carOne = new Car('Ford Focus', 25)
+//use a 'fill' method.
+carOne.fill(10)
+console.log(carOne)
+console.log(carOne.drive(251))
+console.log(carOne)
 
 /*
   TASK 3
