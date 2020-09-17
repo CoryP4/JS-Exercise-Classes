@@ -166,7 +166,7 @@ console.log(lambdaOne.speak())
 */
 class Instructor extends Lambdasian {
   constructor(attr){
-    super(attr)
+    super(attr);
     this.specialty = attr.specialty;
     this.favLanguage = attr.favLanguage;
     this.catchPhrase = attr.catchPhrase;
@@ -208,9 +208,29 @@ console.log(instructOne.grade(lambdaOne, 'Acronyms 101'))
         + `PRAssignment` a method that receives a subject as an argument and returns `student.name has submitted a PR for {subject}`
         + `sprintChallenge` similar to PRAssignment but returns `student.name has begun sprint challenge on {subject}`
 */
-class Student {
-
+class Student extends Lambdasian{
+  constructor(attr){
+    super(attr);
+    this.previousBackground = attr.previousBackground;
+    this.className = attr.className;
+    this.favSubjects = attr.favSubjects;
+  }
+  listSubjects(){
+    return this.favSubjects.toString()
+  }
 }
+
+const studentOne = new Student({
+  name:'Pam Halpert',
+  age:30,
+  location:'Art School',
+  previousBackground:'Reception and sales',
+  className:'Graphic-Design36',
+  favSubjects:['Jims hair','Dwights conspiracy theories','Babysitting Michael']
+})
+
+console.log(studentOne)
+console.log(studentOne.listSubjects())
 
 /*
   TASK 6
