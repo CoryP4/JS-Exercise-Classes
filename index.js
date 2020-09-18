@@ -234,7 +234,7 @@ const studentOne = new Student({
   location:'Art School',
   previousBackground:'Reception and sales',
   className:'Graphic-Design36',
-  favSubjects:['Jims hair','Dwights conspiracy theories','Babysitting Michael']
+  favSubjects:[`Jim's hair`,`Dwight's conspiracy theories`,'Babysitting Michael']
 })
 
 console.log(studentOne)
@@ -255,9 +255,37 @@ console.log(studentOne.sprintChallenge(studentOne.favSubjects[2]))
         + `standUp` a method that takes in a slack channel and returns `{name} announces to {channel}, @channel standy times!`
         + `debugsCode` a method that takes in a student object and a subject and returns `{name} debugs {student.name}'s code on {subject}`
 */
-class ProjectManager {
+class ProjectManager extends Instructor{
+  constructor(attr){
+    super(attr)
+    this.gradClassName = attr.gradClassName;
+    this.favInstructor = attr.favInstructor;
+  }
+
+  standUp(channel){
+    return `${this.name} announces to ${channel}, @channel standy times!`
+  }
+
+  debugsCode(name, subject){
+    return `${this.name} debugs ${name}'s code on ${subject}`
+  }
 
 }
+
+const pjmOne = new ProjectManager({
+  name:'Ryan',
+  age:21,
+  location:'Dunder Mifflin, Corporate',
+  specialty:'Setting fires',
+  favLanguage:'JavaScript',
+  catchPhrase:'Dunder Mifflin INFINITY!',
+  gradClassName:'CS1',
+  favInstructor:'Dwight Schrute',
+})
+
+console.log(pjmOne)
+console.log(pjmOne.standUp('web36'))
+console.log(pjmOne.debugsCode(studentOne.name, studentOne.favSubjects[1]))
 
 /*
   STRETCH PROBLEM (no tests!)
