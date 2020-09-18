@@ -40,9 +40,34 @@ class Airplane {
         + It should return a string with `name` and `age`. Example: "Mary, 50"
 */
 
+//Person class with name + age arguments
 class Person {
-
+  constructor(name, age){
+    this.name = name;
+    this.age = age;
+    this.stomach = [];
+  }
+  //eat method
+  eat(someFood){
+    if(this.stomach.length < 10){
+      this.stomach.push(someFood);
+    }
+  }
+  //poop function
+  poop(){
+    this.stomach = []
+  }
+  //toString method for name and age
+  toString(){
+    return `${this.name} is ${this.age} years old!`
+  }
 }
+
+//initialize 1 person - with name and age arguments
+const personOne = new Person ('Michael Scott', 40)
+
+console.log(personOne)
+console.log(personOne.toString())
 
 /*
   TASK 2
@@ -58,9 +83,39 @@ class Person {
         + The `drive` method should return a string "I ran out of fuel at x miles!" x being `odometer`.
 */
 
+//Car constructor which takes model and milesPerGallon as arguments + tank and odometer for methods
 class Car {
+  constructor(model, milesPerGallon){
+    this.model = model;
+    this.milesPerGallon = milesPerGallon;
+    this.tank = 0;
+    this.odometer = 0;
+  }
+  //create 'fill' method to alter 'tank' value with 'gallons' of fuel
+  fill(gallons){
+    this.tank += gallons;
+  }
+  //create 'drive' method to recieve 'distance' as an argument
+  drive(distance){
+    if(this.tank >= distance/this.milesPerGallon){
+      return this.tank -= distance/this.milesPerGallon, this.odometer += distance;
+    }
+    else{
+      this.odometer = this.tank * this.milesPerGallon;
+      this.tank = 0;
+      return `I ran out of fuel at ${this.odometer} miles!`
+    }
+  }
 
 }
+
+//Declare new Car 
+const carOne = new Car('Ford Focus', 25)
+//use a 'fill' method.
+carOne.fill(10)
+console.log(carOne)
+console.log(carOne.drive(200))
+console.log(carOne)
 
 /*
   TASK 3
@@ -75,8 +130,25 @@ class Car {
         + {name} and {location} of course come from the instance's own properties.
 */
 class Lambdasian {
-
+  constructor(attr){
+    this.name = attr.name;
+    this.age = attr.age;
+    this.location = attr.location;
+  }
+  speak(){
+    return `Hello my name is ${this.name}, I am from ${this.location}.`
+  }
 }
+
+const lambdaOne = new Lambdasian ({
+  name:'Jim Halpert',
+  age:30,
+  location:'Dunder Mifflin Paper'
+})
+
+console.log(lambdaOne)
+console.log(lambdaOne.speak())
+
 
 /*
   TASK 4
@@ -92,9 +164,34 @@ class Lambdasian {
         + `demo` receives a `subject` string as an argument and returns the phrase 'Today we are learning about {subject}' where subject is the param passed in.
         + `grade` receives a `student` object and a `subject` string as arguments and returns '{student.name} receives a perfect score on {subject}'
 */
-class Instructor {
-
+class Instructor extends Lambdasian {
+  constructor(attr){
+    super(attr);
+    this.specialty = attr.specialty;
+    this.favLanguage = attr.favLanguage;
+    this.catchPhrase = attr.catchPhrase;
+  }
+  demo(subject){
+    return ('Today we are learning about '+subject)
+  }
+  grade(student, subject){
+    return `${student.name} receives a perfect score on ${subject}!`
+  }
 }
+
+const instructOne = new Instructor({
+  name:'Creed',
+  age:87,
+  location:'None of your business',
+  specialty:'redux',
+  favLanguage:'JavaScript',
+  catchPhrase:`Don't forget the homies`,
+})
+
+console.log(instructOne)
+console.log(instructOne.demo('Bobbody'))
+console.log(instructOne.grade(lambdaOne, 'Acronyms 101'))
+
 
 /*
   TASK 5
@@ -111,9 +208,39 @@ class Instructor {
         + `PRAssignment` a method that receives a subject as an argument and returns `student.name has submitted a PR for {subject}`
         + `sprintChallenge` similar to PRAssignment but returns `student.name has begun sprint challenge on {subject}`
 */
-class Student {
+class Student extends Lambdasian{
+  constructor(attr){
+    super(attr);
+    this.previousBackground = attr.previousBackground;
+    this.className = attr.className;
+    this.favSubjects = attr.favSubjects;
+  }
 
+  listSubjects(){
+    return this.favSubjects.toString()
+  } // can't figure out how to alter text here
+
+  PRAssignment(subject){
+    return `${this.name} has submitted a PR for ${subject}.`
+  }
+  sprintChallenge(subject){
+    return `${this.name} has begun sprint challenge on ${subject}`
+  }
 }
+
+const studentOne = new Student({
+  name:'Pam Halpert',
+  age:30,
+  location:'Art School',
+  previousBackground:'Reception and sales',
+  className:'Graphic-Design36',
+  favSubjects:[`Jim's hair`,`Dwight's conspiracy theories`,'Babysitting Michael']
+})
+
+console.log(studentOne)
+console.log(studentOne.listSubjects())
+console.log(studentOne.PRAssignment(studentOne.favSubjects[1]))
+console.log(studentOne.sprintChallenge(studentOne.favSubjects[2]))
 
 /*
   TASK 6
@@ -128,9 +255,37 @@ class Student {
         + `standUp` a method that takes in a slack channel and returns `{name} announces to {channel}, @channel standy times!`
         + `debugsCode` a method that takes in a student object and a subject and returns `{name} debugs {student.name}'s code on {subject}`
 */
-class ProjectManager {
+class ProjectManager extends Instructor{
+  constructor(attr){
+    super(attr)
+    this.gradClassName = attr.gradClassName;
+    this.favInstructor = attr.favInstructor;
+  }
+
+  standUp(channel){
+    return `${this.name} announces to ${channel}, @channel standy times!`
+  }
+
+  debugsCode(name, subject){
+    return `${this.name} debugs ${name}'s code on ${subject}`
+  }
 
 }
+
+const pjmOne = new ProjectManager({
+  name:'Ryan',
+  age:21,
+  location:'Dunder Mifflin, Corporate',
+  specialty:'Setting fires',
+  favLanguage:'JavaScript',
+  catchPhrase:'Dunder Mifflin INFINITY!',
+  gradClassName:'CS1',
+  favInstructor:'Dwight Schrute',
+})
+
+console.log(pjmOne)
+console.log(pjmOne.standUp('web36'))
+console.log(pjmOne.debugsCode(studentOne.name, studentOne.favSubjects[1]))
 
 /*
   STRETCH PROBLEM (no tests!)
