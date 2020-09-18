@@ -215,8 +215,16 @@ class Student extends Lambdasian{
     this.className = attr.className;
     this.favSubjects = attr.favSubjects;
   }
+
   listSubjects(){
     return this.favSubjects.toString()
+  } // can't figure out how to alter text here
+
+  PRAssignment(subject){
+    return `${this.name} has submitted a PR for ${subject}.`
+  }
+  sprintChallenge(subject){
+    return `${this.name} has begun sprint challenge on ${subject}`
   }
 }
 
@@ -231,6 +239,8 @@ const studentOne = new Student({
 
 console.log(studentOne)
 console.log(studentOne.listSubjects())
+console.log(studentOne.PRAssignment(studentOne.favSubjects[1]))
+console.log(studentOne.sprintChallenge(studentOne.favSubjects[2]))
 
 /*
   TASK 6
